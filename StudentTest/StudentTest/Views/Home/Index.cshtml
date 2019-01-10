@@ -1,0 +1,62 @@
+﻿@model List<StudentTest.Models.Student>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <h2>Use form post</h2>
+    <div class="col-md-8">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>學號</td>
+                    <td>名稱</td>
+                    <td>生日</td>
+                    <td>科系</td>
+                </tr>
+            </thead>
+            <tbody>
+                @if (this.Model != null) {
+                    foreach (var pd in this.Model) {
+                        <tr>
+                            <td>@pd.StudentNo</td>
+                            <td>@pd.StudentName</td>
+                            <td>@pd.Birthday</td>
+                            <td>@pd.Department</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-4">
+        <form class="form-inline" method="post" action="/Home/ShowAll">
+            <lable class="form-inline">顯示全部</lable>
+            <button type="submit" class="btn btn-primary">確定</button>
+        </form>
+        <h2>查詢</h2>
+        <form class="form-inline" method="post" action="/Home/Search">
+            <select name="SearchCol" class="form-control">
+                <option value="StudentNo" class="dropdown-item">學號</option>
+                <option value="StudentName" class="dropdown-item">姓名</option>
+                <option value="Birthday" class="dropdown-item">生日</option>
+                <option value="Department" class="dropdown-item">科系</option>
+            </select>
+            <input type="text" name="InputInfo" class="form-control" />
+            <button type="submit" class="btn btn-primary">確認</button>
+        </form>
+        <h2>新增</h2>
+        <form class="form-group" method="post" action="/Home/AddData">
+            <label>學號</label>
+            <input type="text" name="StudentNo" class="form-control" required>
+            <label>姓名</label>
+            <input type="text" name="StudentName" class="form-control" required>
+            <label>生日</label>
+            <input type="text" name="Birthday" class="form-control" required>
+            <label>科系</label>
+            <input type="text" name="Department" class="form-control" required>
+            <button type="submit" class="btn btn-primary">確認</button>
+        </form>
+        <label>@ViewBag.status</label>
+    </div>
+</div>
